@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PerfectApps – Mobile & Web Solutions for a Better Life</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
+  <style>
+    :root {
+      --primary: #4f46e5;
+      --primary-dark: #3730a3;
+      --accent: #06b6d4;
+      --text: #1e293b;
+      --muted: #64748b;
+      --bg: #f8fafc;
+      --white: #ffffff;
+      --card-shadow: 0 4px 24px rgba(79,70,229,0.10);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; color: var(--text); background: var(--bg); }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 6%; height: 70px;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 1px 12px rgba(0,0,0,0.07);
+    }
+    .nav-logo {
+      font-size: 1.5rem; font-weight: 800; color: var(--primary);
+      text-decoration: none; letter-spacing: -0.5px;
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a {
+      text-decoration: none; color: var(--muted); font-weight: 500;
+      font-size: 0.95rem; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--primary); }
+    .nav-cta {
+      background: var(--primary); color: white; padding: 10px 22px;
+      border-radius: 8px; text-decoration: none; font-weight: 600;
+      font-size: 0.9rem; transition: background 0.2s;
+    }
+    .nav-cta:hover { background: var(--primary-dark); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #4f46e5 0%, #06b6d4 100%);
+      display: flex; align-items: center;
+      padding: 100px 6% 60px;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: -80px; right: -80px;
+      width: 500px; height: 500px; border-radius: 50%;
+      background: rgba(255,255,255,0.07);
+    }
+    .hero::after {
+      content: '';
+      position: absolute; bottom: -100px; left: -60px;
+      width: 350px; height: 350px; border-radius: 50%;
+      background: rgba(255,255,255,0.05);
+    }
+    .hero-content { max-width: 620px; position: relative; z-index: 2; }
+    .hero-badge {
+      display: inline-block; background: rgba(255,255,255,0.18);
+      color: white; font-size: 0.8rem; font-weight: 600;
+      padding: 6px 16px; border-radius: 50px; margin-bottom: 24px;
+      letter-spacing: 0.5px; text-transform: uppercase;
+    }
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      font-weight: 800; color: white; line-height: 1.15;
+      margin-bottom: 20px; letter-spacing: -1px;
+    }
+    .hero h1 span { color: #a5f3fc; }
+    .hero p {
+      font-size: 1.15rem; color: rgba(255,255,255,0.88);
+      line-height: 1.7; margin-bottom: 36px; max-width: 520px;
+    }
+    .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+    .btn-white {
+      background: white; color: var(--primary);
+      padding: 14px 28px; border-radius: 10px;
+      text-decoration: none; font-weight: 700; font-size: 1rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    }
+    .btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,0.2); }
+    .btn-outline {
+      background: transparent; color: white;
+      padding: 14px 28px; border-radius: 10px;
+      text-decoration: none; font-weight: 600; font-size: 1rem;
+      border: 2px solid rgba(255,255,255,0.6);
+      transition: background 0.2s;
+    }
+    .btn-outline:hover { background: rgba(255,255,255,0.1); }
+    .hero-stats {
+      display: flex; gap: 40px; margin-top: 60px; flex-wrap: wrap;
+    }
+    .stat { color: white; }
+    .stat .num { font-size: 2rem; font-weight: 800; display: block; }
+    .stat .label { font-size: 0.85rem; opacity: 0.8; margin-top: 2px; }
+
+    /* ── SECTIONS ── */
+    section { padding: 90px 6%; }
+    .section-tag {
+      display: inline-block; color: var(--primary);
+      font-size: 0.8rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1px; margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 800; color: var(--text);
+      letter-spacing: -0.5px; margin-bottom: 16px;
+    }
+    .section-sub {
+      font-size: 1.05rem; color: var(--muted);
+      max-width: 560px; line-height: 1.7;
+    }
+    .section-header { margin-bottom: 56px; }
+    .center { text-align: center; }
+    .center .section-sub { margin: 0 auto; }
+
+    /* ── ABOUT ── */
+    #about { background: white; }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+    }
+    .about-visual {
+      background: linear-gradient(135deg, #ede9fe, #e0f2fe);
+      border-radius: 24px; padding: 50px;
+      display: flex; flex-direction: column; gap: 20px; align-items: center;
+    }
+    .about-icon-row { display: flex; gap: 20px; }
+    .about-icon {
+      width: 72px; height: 72px; border-radius: 18px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.8rem;
+    }
+    .icon-purple { background: #4f46e5; }
+    .icon-cyan   { background: #06b6d4; }
+    .icon-green  { background: #10b981; }
+    .icon-orange { background: #f59e0b; }
+    .about-values { display: flex; flex-direction: column; gap: 16px; margin-top: 20px; }
+    .value-item { display: flex; align-items: center; gap: 12px; }
+    .value-item i { color: var(--primary); font-size: 1.1rem; }
+    .value-item span { font-weight: 500; font-size: 0.95rem; color: var(--text); }
+
+    /* ── SERVICES ── */
+    #services { background: var(--bg); }
+    .services-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 28px;
+    }
+    .service-card {
+      background: white; border-radius: 20px; padding: 36px 28px;
+      box-shadow: var(--card-shadow); transition: transform 0.25s, box-shadow 0.25s;
+      border: 1px solid #f1f5f9;
+    }
+    .service-card:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(79,70,229,0.15); }
+    .service-icon {
+      width: 60px; height: 60px; border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem; margin-bottom: 22px;
+    }
+    .service-card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 10px; }
+    .service-card p { color: var(--muted); font-size: 0.93rem; line-height: 1.7; }
+
+    /* ── APPS ── */
+    #apps { background: white; }
+    .apps-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 28px;
+    }
+    .app-card {
+      border-radius: 20px; overflow: hidden;
+      box-shadow: var(--card-shadow);
+      border: 1px solid #f1f5f9; transition: transform 0.25s;
+    }
+    .app-card:hover { transform: translateY(-6px); }
+    .app-header {
+      padding: 32px 28px 24px;
+      display: flex; align-items: center; gap: 16px;
+    }
+    .app-logo {
+      width: 60px; height: 60px; border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.7rem; flex-shrink: 0;
+    }
+    .app-header-info h3 { font-size: 1.1rem; font-weight: 700; }
+    .app-header-info .tag {
+      font-size: 0.75rem; font-weight: 600; color: var(--primary);
+      background: #ede9fe; padding: 3px 10px; border-radius: 50px;
+      display: inline-block; margin-top: 4px;
+    }
+    .app-body { padding: 0 28px 28px; }
+    .app-body p { color: var(--muted); font-size: 0.92rem; line-height: 1.7; margin-bottom: 18px; }
+    .app-features { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .app-features li { font-size: 0.88rem; color: var(--text); display: flex; align-items: center; gap: 8px; }
+    .app-features li::before {
+      content: '✓'; color: white; background: #10b981;
+      width: 18px; height: 18px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.65rem; font-weight: 800; flex-shrink: 0;
+    }
+
+    /* ── WHY US ── */
+    #why { background: linear-gradient(135deg, #4f46e5 0%, #06b6d4 100%); }
+    #why .section-title { color: white; }
+    #why .section-tag { color: #a5f3fc; }
+    #why .section-sub { color: rgba(255,255,255,0.8); }
+    .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; }
+    .why-card {
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 18px; padding: 32px 24px;
+      text-align: center; backdrop-filter: blur(6px);
+    }
+    .why-card i { font-size: 2rem; color: #a5f3fc; margin-bottom: 16px; }
+    .why-card h3 { font-size: 1rem; font-weight: 700; color: white; margin-bottom: 8px; }
+    .why-card p { font-size: 0.88rem; color: rgba(255,255,255,0.78); line-height: 1.6; }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--bg); }
+    .contact-wrapper {
+      display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; align-items: start;
+    }
+    .contact-info h2 { font-size: 1.8rem; font-weight: 800; margin-bottom: 16px; }
+    .contact-info p { color: var(--muted); line-height: 1.7; margin-bottom: 32px; }
+    .contact-item { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+    .contact-item .ci-icon {
+      width: 46px; height: 46px; border-radius: 12px; background: #ede9fe;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--primary); font-size: 1.1rem; flex-shrink: 0;
+    }
+    .contact-item strong { display: block; font-size: 0.8rem; color: var(--muted); margin-bottom: 2px; }
+    .contact-item span { font-weight: 500; font-size: 0.95rem; }
+    .contact-form { background: white; border-radius: 20px; padding: 40px; box-shadow: var(--card-shadow); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group { margin-bottom: 20px; }
+    .form-group label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 8px; color: var(--text); }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%; padding: 12px 16px; border-radius: 10px;
+      border: 1.5px solid #e2e8f0; font-size: 0.95rem;
+      font-family: 'Inter', sans-serif; color: var(--text);
+      transition: border-color 0.2s; outline: none; background: #f8fafc;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus { border-color: var(--primary); background: white; }
+    .form-group textarea { height: 110px; resize: vertical; }
+    .btn-submit {
+      width: 100%; background: var(--primary); color: white;
+      border: none; padding: 14px; border-radius: 10px;
+      font-size: 1rem; font-weight: 700; cursor: pointer;
+      transition: background 0.2s; font-family: 'Inter', sans-serif;
+    }
+    .btn-submit:hover { background: var(--primary-dark); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #0f172a; color: #94a3b8;
+      padding: 60px 6% 30px;
+    }
+    .footer-grid {
+      display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 48px; margin-bottom: 48px;
+    }
+    .footer-logo {
+      font-size: 1.4rem; font-weight: 800;
+      color: white; margin-bottom: 14px; display: block;
+    }
+    .footer-logo span { color: var(--accent); }
+    .footer-about { font-size: 0.9rem; line-height: 1.7; }
+    .footer-col h4 { color: white; font-weight: 700; margin-bottom: 18px; font-size: 0.95rem; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 10px; }
+    .footer-col ul li a { color: #94a3b8; text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-col ul li a:hover { color: white; }
+    .footer-bottom {
+      border-top: 1px solid #1e293b; padding-top: 24px;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 12px;
+    }
+    .footer-bottom p { font-size: 0.85rem; }
+    .social-links { display: flex; gap: 14px; }
+    .social-links a {
+      width: 38px; height: 38px; border-radius: 10px;
+      background: #1e293b; color: #94a3b8;
+      display: flex; align-items: center; justify-content: center;
+      text-decoration: none; transition: background 0.2s, color 0.2s;
+    }
+    .social-links a:hover { background: var(--primary); color: white; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 0 5%; }
+      .nav-links { display: none; }
+      .about-grid,
+      .contact-wrapper,
+      .footer-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .hero-stats { gap: 24px; }
+      .footer-grid { gap: 32px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Perfect<span>Apps</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#apps">Our Apps</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Get in Touch</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">🚀 Mobile & Web Solutions</div>
+    <h1>Making Life <span>Simpler</span> with Smart Apps</h1>
+    <p>
+      We build affordable, easy-to-use mobile and web applications for schools,
+      small businesses, shopkeepers, and everyday people — technology that truly works for you.
+    </p>
+    <div class="hero-btns">
+      <a href="#apps" class="btn-white">Explore Our Apps</a>
+      <a href="#contact" class="btn-outline">Contact Us</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><span class="num">4+</span><span class="label">Apps Built</span></div>
+      <div class="stat"><span class="num">100%</span><span class="label">Client Focused</span></div>
+      <div class="stat"><span class="num">Simple</span><span class="label">By Design</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div>
+      <span class="section-tag">Who We Are</span>
+      <h2 class="section-title">Technology for Everyone, Not Just Experts</h2>
+      <p style="color:var(--muted);line-height:1.8;margin-bottom:24px;">
+        At <strong>PerfectApps</strong>, we believe technology should make life easier for everyone —
+        from a small shopkeeper managing daily sales to a school administrator tracking student records.
+        We design and develop simple, powerful apps that solve real everyday problems.
+      </p>
+      <p style="color:var(--muted);line-height:1.8;margin-bottom:32px;">
+        Our solutions are affordable, easy to use, and built specifically for the needs of
+        individuals and small businesses — no complicated setup, no technical expertise required.
+      </p>
+      <div class="about-values">
+        <div class="value-item"><i class="fas fa-check-circle"></i><span>Simple & Easy to Use</span></div>
+        <div class="value-item"><i class="fas fa-check-circle"></i><span>Affordable for Small Businesses</span></div>
+        <div class="value-item"><i class="fas fa-check-circle"></i><span>Built for Real Everyday Problems</span></div>
+        <div class="value-item"><i class="fas fa-check-circle"></i><span>Available on Mobile & Web</span></div>
+      </div>
+    </div>
+    <div class="about-visual">
+      <div class="about-icon-row">
+        <div class="about-icon icon-purple">🏗️</div>
+        <div class="about-icon icon-cyan">🏫</div>
+      </div>
+      <div class="about-icon-row">
+        <div class="about-icon icon-green">🛒</div>
+        <div class="about-icon icon-orange">📊</div>
+      </div>
+      <p style="text-align:center;color:var(--muted);font-size:0.95rem;margin-top:20px;font-weight:500;">
+        Apps for Construction · Schools · Shops · Business
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-header center">
+    <span class="section-tag">What We Do</span>
+    <h2 class="section-title">Our Services</h2>
+    <p class="section-sub">End-to-end mobile and web development tailored to your specific needs and budget.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon" style="background:#ede9fe;">📱</div>
+      <h3>Mobile App Development</h3>
+      <p>Android and cross-platform mobile apps that are fast, reliable, and easy for anyone to use — no technical knowledge needed.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon" style="background:#e0f2fe;">🌐</div>
+      <h3>Web App Development</h3>
+      <p>Browser-based applications accessible from any device — perfect for teams and businesses that need flexibility.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon" style="background:#dcfce7;">🏪</div>
+      <h3>Shop & Business Apps</h3>
+      <p>Simple billing, inventory, and sales tracking apps built specifically for small shops and local businesses.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon" style="background:#fef9c3;">🏫</div>
+      <h3>School Management Apps</h3>
+      <p>Student records, attendance, fees, and communication tools that make school management effortless.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon" style="background:#ffe4e6;">🔧</div>
+      <h3>Custom Solutions</h3>
+      <p>Have a unique idea? We build fully custom apps tailored exactly to your workflow and requirements.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon" style="background:#f3e8ff;">🚀</div>
+      <h3>App Publishing</h3>
+      <p>We handle the entire process of publishing your app to the Google Play Store — ready for your users.</p>
+    </div>
+  </div>
+</section>
+
+<!-- APPS -->
+<section id="apps">
+  <div class="section-header center">
+    <span class="section-tag">Our Portfolio</span>
+    <h2 class="section-title">Apps We've Built</h2>
+    <p class="section-sub">Real solutions solving real problems for real people.</p>
+  </div>
+  <div class="apps-grid">
+
+    <!-- BuildTrack -->
+    <div class="app-card">
+      <div class="app-header" style="background:#f5f3ff;">
+        <div class="app-logo" style="background:#4f46e5;">🏗️</div>
+        <div class="app-header-info">
+          <h3>BuildTrack</h3>
+          <span class="tag">Construction</span>
+        </div>
+      </div>
+      <div class="app-body">
+        <p>A smart app for tracking construction projects, tasks, and progress — keeping builders and contractors organised at every stage.</p>
+        <ul class="app-features">
+          <li>Track project milestones & tasks</li>
+          <li>Monitor progress in real time</li>
+          <li>Simple for site workers to use</li>
+          <li>Available on Android</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- School App -->
+    <div class="app-card">
+      <div class="app-header" style="background:#f0fdf4;">
+        <div class="app-logo" style="background:#10b981;">🏫</div>
+        <div class="app-header-info">
+          <h3>SchoolEasy</h3>
+          <span class="tag" style="background:#dcfce7;color:#059669;">Education</span>
+        </div>
+      </div>
+      <div class="app-body">
+        <p>An all-in-one school management app that simplifies attendance, fees, marks, and parent communication for small schools.</p>
+        <ul class="app-features">
+          <li>Student attendance tracking</li>
+          <li>Fee collection & reminders</li>
+          <li>Exam marks & report cards</li>
+          <li>Parent notifications</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Shop App -->
+    <div class="app-card">
+      <div class="app-header" style="background:#fffbeb;">
+        <div class="app-logo" style="background:#f59e0b;">🛒</div>
+        <div class="app-header-info">
+          <h3>ShopSimple</h3>
+          <span class="tag" style="background:#fef9c3;color:#d97706;">Retail</span>
+        </div>
+      </div>
+      <div class="app-body">
+        <p>A billing and inventory app made for small shopkeepers — no accountant needed. Track sales, stock, and customers with ease.</p>
+        <ul class="app-features">
+          <li>Quick billing & invoices</li>
+          <li>Stock & inventory tracking</li>
+          <li>Daily sales summary</li>
+          <li>Customer credit management</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Business App -->
+    <div class="app-card">
+      <div class="app-header" style="background:#eff6ff;">
+        <div class="app-logo" style="background:#3b82f6;">📊</div>
+        <div class="app-header-info">
+          <h3>BizTrack</h3>
+          <span class="tag" style="background:#dbeafe;color:#2563eb;">Business</span>
+        </div>
+      </div>
+      <div class="app-body">
+        <p>A simple business management app for small enterprises — track income, expenses, staff, and daily operations in one place.</p>
+        <ul class="app-features">
+          <li>Income & expense tracking</li>
+          <li>Staff attendance & payroll</li>
+          <li>Daily business reports</li>
+          <li>Works offline too</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- WHY US -->
+<section id="why">
+  <div class="section-header center">
+    <span class="section-tag">Why PerfectApps</span>
+    <h2 class="section-title">Why Choose Us?</h2>
+    <p class="section-sub">We are not just developers — we are problem solvers who care about your success.</p>
+  </div>
+  <div class="why-grid">
+    <div class="why-card">
+      <i class="fas fa-heart"></i>
+      <h3>Made with Care</h3>
+      <p>Every app is designed with the end user in mind — simple, clean, and frustration-free.</p>
+    </div>
+    <div class="why-card">
+      <i class="fas fa-wallet"></i>
+      <h3>Affordable Pricing</h3>
+      <p>Great apps shouldn't cost a fortune. Our pricing is friendly for individuals and small businesses.</p>
+    </div>
+    <div class="why-card">
+      <i class="fas fa-bolt"></i>
+      <h3>Fast Delivery</h3>
+      <p>We work efficiently to deliver your app quickly without compromising on quality.</p>
+    </div>
+    <div class="why-card">
+      <i class="fas fa-headset"></i>
+      <h3>Ongoing Support</h3>
+      <p>We don't disappear after launch. We provide continued support and updates as you grow.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-wrapper">
+    <div class="contact-info">
+      <span class="section-tag">Get In Touch</span>
+      <h2 class="section-title">Let's Build Something Together</h2>
+      <p>Have an idea for an app? Need a custom solution for your business or school? We'd love to hear from you. Drop us a message and we'll get back to you soon.</p>
+      <div class="contact-item">
+        <div class="ci-icon"><i class="fas fa-envelope"></i></div>
+        <div>
+          <strong>Email</strong>
+          <span>hello@perfectapps.in</span>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="ci-icon"><i class="fas fa-phone"></i></div>
+        <div>
+          <strong>Phone / WhatsApp</strong>
+          <span>+91 XXXXX XXXXX</span>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="ci-icon"><i class="fas fa-map-marker-alt"></i></div>
+        <div>
+          <strong>Location</strong>
+          <span>India</span>
+        </div>
+      </div>
+    </div>
+    <div class="contact-form">
+      <h3 style="font-size:1.2rem;font-weight:700;margin-bottom:24px;">Send Us a Message</h3>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Your Name</label>
+          <input type="text" placeholder="Ravi Kumar"/>
+        </div>
+        <div class="form-group">
+          <label>Phone / WhatsApp</label>
+          <input type="tel" placeholder="+91 XXXXX XXXXX"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" placeholder="you@email.com"/>
+      </div>
+      <div class="form-group">
+        <label>I'm interested in</label>
+        <select>
+          <option>Select an option</option>
+          <option>Construction / BuildTrack App</option>
+          <option>School Management App</option>
+          <option>Shop / Billing App</option>
+          <option>Business Management App</option>
+          <option>Custom App Development</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Your Message</label>
+        <textarea placeholder="Tell us about your idea or requirement..."></textarea>
+      </div>
+      <button class="btn-submit">Send Message 🚀</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <span class="footer-logo">Perfect<span>Apps</span></span>
+      <p class="footer-about">
+        Mobile & Web solutions for a better life. We build simple, affordable apps for schools,
+        shops, businesses, and everyday people across India.
+      </p>
+    </div>
+    <div class="footer-col">
+      <h4>Our Apps</h4>
+      <ul>
+        <li><a href="#">BuildTrack</a></li>
+        <li><a href="#">SchoolEasy</a></li>
+        <li><a href="#">ShopSimple</a></li>
+        <li><a href="#">BizTrack</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="../buildtrack-privacy/index.html">Privacy Policy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2025 PerfectApps. All rights reserved.</p>
+    <div class="social-links">
+      <a href="#"><i class="fab fa-whatsapp"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-linkedin"></i></a>
+      <a href="#"><i class="fab fa-google-play"></i></a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
